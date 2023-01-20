@@ -24,7 +24,7 @@
 		<module>template-online-common</module>
 		<module>template-batch-common</module>
 		<module>template-batch-web</module>
-		<module>template-common-ui</module>
+		<module>template-common-util</module>
 		<module>template-service</module>
 	</modules>
 
