@@ -3,6 +3,9 @@ package com.tsmc.common.reader;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.batch.core.ExitStatus;
+import org.springframework.batch.core.StepExecution;
+import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.NonTransientResourceException;
 import org.springframework.batch.item.ParseException;
@@ -22,26 +25,36 @@ import lombok.RequiredArgsConstructor;
 @Component
 @Scope("prototype")
 @RequiredArgsConstructor
-public class PhotoLayerReader implements ItemReader<List<OnPhotoLayer>> {
+public class PhotoLayerReader implements ItemReader<List<OnPhotoLayer>>, StepExecutionListener {
 	
     private final OnPhotoLayerRepository onPhotoLayerRepository;
 	
     private boolean execute = false;
     
+    List<OnPhotoLayer> onPhotoLayerList;
+    
 	@Override
 	public List<OnPhotoLayer> read()
 			throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
-		System.out.println("aaaaaaaaaa:" + execute);
-		List<OnPhotoLayer> onPhotoLayerList = null;
-		
 		if(!execute) {
-			onPhotoLayerList = onPhotoLayerRepository.getConfigType("bbb");
 			execute = true;
 		} else {
-			execute = false;
+			onPhotoLayerList = null;
 		}
-		
 		return onPhotoLayerList;
+	}
+
+	@Override
+	public void beforeStep(StepExecution stepExecution) {
+		onPhotoLayerList = onPhotoLayerRepository.getConfigType("bbb");
+		execute = false;
+	}
+
+	@Override
+	public ExitStatus afterStep(StepExecution stepExecution) {
+		execute = false;
+		onPhotoLayerList = null;
+		return null;
 	}
 	
 }
