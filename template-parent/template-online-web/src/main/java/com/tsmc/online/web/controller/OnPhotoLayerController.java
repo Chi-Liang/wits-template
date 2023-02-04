@@ -2,15 +2,20 @@ package com.tsmc.online.web.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import com.tsmc.common.service.OnPhotoLayerService;
+import com.tsmc.common.util.MessageSourceUtil;
 import com.tsmc.common.vo.OnPhotoLayerVo;
 import com.tsmc.common.vo.ReturnOnPhotoLayerVo;
-import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -23,38 +28,34 @@ public class OnPhotoLayerController {
 	
 	private final OnPhotoLayerService onPhotoLayerServiceSecond;
 	
+	
 	@PostMapping("/findAll")
-	@Operation(summary = "Find all PhotoLaye")
 	public ReturnOnPhotoLayerVo findAll() {
 		List<OnPhotoLayerVo> onPhotoLayerVoList = onPhotoLayerServiceFirst.findAll();
 		return new ReturnOnPhotoLayerVo(true,"",onPhotoLayerVoList);
 	}
 	
 	@PostMapping("/findById")
-	@Operation(summary = "findById PhotoLaye")
-	public ReturnOnPhotoLayerVo findById(@RequestParam String photoLaye) {
-		OnPhotoLayerVo onPhotoLayerVo = onPhotoLayerServiceFirst.findById(photoLaye);
-		return new ReturnOnPhotoLayerVo(true,"",Arrays.asList(onPhotoLayerVo));
+	public ReturnOnPhotoLayerVo findById(@RequestBody OnPhotoLayerVo onPhotoLayerVo) {
+		OnPhotoLayerVo onPhotoLayerVo1 = onPhotoLayerServiceFirst.findById(onPhotoLayerVo);
+		return new ReturnOnPhotoLayerVo(true,"",Arrays.asList(onPhotoLayerVo1));
 	}
 	
 	@PostMapping("/insert")
-	@Operation(summary = "insert PhotoLaye")
 	public ReturnOnPhotoLayerVo insert(@RequestBody OnPhotoLayerVo onPhotoLayerVo) {
-		onPhotoLayerServiceFirst.insert(onPhotoLayerVo);
+		onPhotoLayerServiceFirst.insertOrUpdate(onPhotoLayerVo);
 		return new ReturnOnPhotoLayerVo(true,"",null);
 	}
 	
 	@PostMapping("/update")
-	@Operation(summary = "update PhotoLaye")
 	public ReturnOnPhotoLayerVo update(@RequestBody OnPhotoLayerVo onPhotoLayerVo) {
-		onPhotoLayerServiceFirst.update(onPhotoLayerVo);
+		onPhotoLayerServiceFirst.insertOrUpdate(onPhotoLayerVo);
 		return new ReturnOnPhotoLayerVo(true,"",null);
 	}
 	
-	@PostMapping("/delete")
-	@Operation(summary = "delete PhotoLaye")
-	public ReturnOnPhotoLayerVo delete(@RequestParam String photoLaye) {
-		onPhotoLayerServiceSecond.delete(photoLaye);
+	@PostMapping("/deleteById")
+	public ReturnOnPhotoLayerVo deleteById(@RequestBody OnPhotoLayerVo onPhotoLayerVo) {
+		onPhotoLayerServiceSecond.deleteById(onPhotoLayerVo);
 		return new ReturnOnPhotoLayerVo(true,"",null);
 	}
 	

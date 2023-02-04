@@ -22,9 +22,12 @@
 			<artifactId>template-online-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!-- <dependency> <groupId>org.springdoc</groupId> <artifactId>springdoc-openapi-ui</artifactId> 
+			</dependency> -->
 		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.73</version>
 		</dependency>
 	</dependencies>
 

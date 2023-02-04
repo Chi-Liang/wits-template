@@ -1,6 +1,9 @@
 package com.tsmc.online.web.smaple;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -13,21 +16,22 @@ import com.tsmc.online.web.BaseTest;
 public class OnPhotoLayerControllerTest extends BaseTest {
 	
 	public static OnPhotoLayerVo onPhotoLayerVo;
+	public static HttpEntity<OnPhotoLayerVo> request;
 	
 	@BeforeAll
 	public static void init() {
 		onPhotoLayerVo = new OnPhotoLayerVo();
-		onPhotoLayerVo.setPhotoLayer("kkk");
+		onPhotoLayerVo.setPhotoLayer("963");
 		onPhotoLayerVo.setPhotoLayerName("jjj");
 		onPhotoLayerVo.setConfigType("bbb");
+		
+		request = new HttpEntity<>(onPhotoLayerVo);
 	}
 	
 	@Test
 	@Order(1)
 	public void testInsert() {
 
-
-        HttpEntity<OnPhotoLayerVo> request = new HttpEntity<>(onPhotoLayerVo);
         ResponseEntity<ReturnOnPhotoLayerVo> responseEntity =
                 testRestTemplate.postForEntity("/onPhotoLayer/insert", request, ReturnOnPhotoLayerVo.class);
         
@@ -41,9 +45,8 @@ public class OnPhotoLayerControllerTest extends BaseTest {
 	@Test
 	@Order(2)
 	public void testFindById() {
-
-		ResponseEntity<ReturnOnPhotoLayerVo> responseEntity = testRestTemplate.postForEntity(
-				"/onPhotoLayer/findById?photoLaye=" + onPhotoLayerVo.getPhotoLayer(), null, ReturnOnPhotoLayerVo.class);
+		ResponseEntity<ReturnOnPhotoLayerVo> responseEntity =
+	                testRestTemplate.postForEntity("/onPhotoLayer/findById", request, ReturnOnPhotoLayerVo.class);
 
 		ReturnOnPhotoLayerVo returnOnPhotoLayerVo = responseEntity.getBody();
 		assertNotNull(returnOnPhotoLayerVo);
@@ -55,8 +58,8 @@ public class OnPhotoLayerControllerTest extends BaseTest {
 	@Order(3)
 	public void testFindAll() {
 
-		ResponseEntity<ReturnOnPhotoLayerVo> responseEntity = testRestTemplate.postForEntity(
-				"/onPhotoLayer/findAll", null, ReturnOnPhotoLayerVo.class);
+		ResponseEntity<ReturnOnPhotoLayerVo> responseEntity =
+	                testRestTemplate.postForEntity("/onPhotoLayer/findAll", null, ReturnOnPhotoLayerVo.class);
 
 		ReturnOnPhotoLayerVo returnOnPhotoLayerVo = responseEntity.getBody();
 		assertNotNull(returnOnPhotoLayerVo);
@@ -70,7 +73,6 @@ public class OnPhotoLayerControllerTest extends BaseTest {
 		String photoLayerName = "hhh";
 		onPhotoLayerVo.setPhotoLayerName(photoLayerName);
 		
-		HttpEntity<OnPhotoLayerVo> request = new HttpEntity<>(onPhotoLayerVo);
         ResponseEntity<ReturnOnPhotoLayerVo> responseEntity =
                 testRestTemplate.postForEntity("/onPhotoLayer/update", request, ReturnOnPhotoLayerVo.class);
         
@@ -85,8 +87,7 @@ public class OnPhotoLayerControllerTest extends BaseTest {
 	public void testDelete() {
 
         ResponseEntity<ReturnOnPhotoLayerVo> responseEntity =
-				testRestTemplate.postForEntity("/onPhotoLayer/delete?photoLaye=" + onPhotoLayerVo.getPhotoLayer(),
-						null, ReturnOnPhotoLayerVo.class);
+                testRestTemplate.postForEntity("/onPhotoLayer/deleteById", request, ReturnOnPhotoLayerVo.class);
         
         ReturnOnPhotoLayerVo returnOnPhotoLayerVo = responseEntity.getBody();
         assertNotNull(returnOnPhotoLayerVo);

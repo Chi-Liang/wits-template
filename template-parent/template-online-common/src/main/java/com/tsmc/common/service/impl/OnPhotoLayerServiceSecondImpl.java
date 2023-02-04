@@ -2,7 +2,6 @@ package com.tsmc.common.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import com.tsmc.common.entity.OnPhotoLayer;
@@ -31,35 +30,31 @@ public class OnPhotoLayerServiceSecondImpl implements OnPhotoLayerService {
 		
 		return onPhotoLayerVoList;
 	}
-
+	
 	@Override
-	public OnPhotoLayerVo findById(String photoLayer) {
-		Optional<OnPhotoLayer> onPhotoLayer = onPhotoLayerRepository.findById(photoLayer);
+	public OnPhotoLayerVo findById(OnPhotoLayerVo t) {
+		Optional<OnPhotoLayer> onPhotoLayer = onPhotoLayerRepository.findById(t.getPhotoLayer());
 		OnPhotoLayerVo onPhotoLayerVo = new OnPhotoLayerVo();
 		if(onPhotoLayer.isPresent()) {
 			entityToVo.Tranfer(onPhotoLayer.get(), onPhotoLayerVo);
 		}
 		return onPhotoLayerVo;
 	}
-
+	
 	@Override
-	public OnPhotoLayer update(OnPhotoLayerVo onPhotoLayerVo) {
-		OnPhotoLayer onPhotoLayer = new OnPhotoLayer();
-		voToentity.Tranfer(onPhotoLayerVo, onPhotoLayer);
-		return onPhotoLayerRepository.save(onPhotoLayer);
-	}
-
-	@Override
-	public OnPhotoLayer insert(OnPhotoLayerVo onPhotoLayerVo) {
-		OnPhotoLayer onPhotoLayer = new OnPhotoLayer();
-		voToentity.Tranfer(onPhotoLayerVo, onPhotoLayer);
-		return onPhotoLayerRepository.save(onPhotoLayer);
-	}
-
-	@Override
-	public void delete(String photoLayer) {
+	public OnPhotoLayerVo insertOrUpdate(OnPhotoLayerVo t) {
 		
-		onPhotoLayerRepository.deleteById(photoLayer);
+		OnPhotoLayer onPhotoLayer = new OnPhotoLayer();
+		voToentity.Tranfer(t, onPhotoLayer);
+		onPhotoLayerRepository.save(onPhotoLayer);
+		entityToVo.Tranfer(onPhotoLayer, t);
+		return t;
+		
+	}
+	@Override
+	public void deleteById(OnPhotoLayerVo t) {
+		
+		onPhotoLayerRepository.deleteById(t.getPhotoLayer());
 		
 	}
 

@@ -15,10 +15,6 @@ spring:
     #show-sql: true
     properties:
       hibernate.format_sql: true
-     
-  batch:
-    jdbc.initialize-schema: always
-    job.enabled: true
 
 logging:
   level:

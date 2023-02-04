@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import com.tsmc.common.BaseTest;
-import com.tsmc.common.entity.OnPhotoLayer;
 import com.tsmc.common.vo.OnPhotoLayerVo;
 
 public class OnPhotoLayerServiceTest extends BaseTest {
@@ -26,8 +25,7 @@ public class OnPhotoLayerServiceTest extends BaseTest {
 	@Test
 	@Order(1)
 	public void testInsert() {
-
-		OnPhotoLayer returnVo = onPhotoLayerServiceFirst.insert(onPhotoLayerVo);
+		OnPhotoLayerVo returnVo = onPhotoLayerServiceFirst.insertOrUpdate(onPhotoLayerVo);
 		assertEquals(returnVo.getPhotoLayer(),onPhotoLayerVo.getPhotoLayer());
 
 	}
@@ -36,7 +34,7 @@ public class OnPhotoLayerServiceTest extends BaseTest {
 	@Order(2)
 	public void testFindById() {
 
-		OnPhotoLayerVo returnVo = onPhotoLayerServiceFirst.findById(onPhotoLayerVo.getPhotoLayer());
+		OnPhotoLayerVo returnVo = onPhotoLayerServiceFirst.findById(onPhotoLayerVo);
 		assertEquals(returnVo.getPhotoLayer(),onPhotoLayerVo.getPhotoLayer());
 
 	}
@@ -56,7 +54,7 @@ public class OnPhotoLayerServiceTest extends BaseTest {
 	public void testUpdate() {
 		String photoLayerName = "hhh";
 		onPhotoLayerVo.setPhotoLayerName(photoLayerName);
-		OnPhotoLayer returnVo = onPhotoLayerServiceFirst.update(onPhotoLayerVo);
+		OnPhotoLayerVo returnVo = onPhotoLayerServiceFirst.insertOrUpdate(onPhotoLayerVo);
 		assertEquals(returnVo.getPhotoLayer(),onPhotoLayerVo.getPhotoLayer());
 		assertEquals(returnVo.getPhotoLayerName() ,onPhotoLayerVo.getPhotoLayerName());
 
@@ -65,8 +63,8 @@ public class OnPhotoLayerServiceTest extends BaseTest {
 	@Test
 	@Order(5)
 	public void testDelete() {
-
-		onPhotoLayerServiceFirst.delete(onPhotoLayerVo.getPhotoLayer());
+		
+		onPhotoLayerServiceFirst.deleteById(onPhotoLayerVo);
 
 	}
 
