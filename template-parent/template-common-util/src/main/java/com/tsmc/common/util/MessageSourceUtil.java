@@ -4,6 +4,9 @@ import java.util.Locale;
 
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
+
+import com.tsmc.common.constant.I18nEnum;
+
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -12,15 +15,15 @@ public class MessageSourceUtil {
 	
 	private final MessageSource messageSource;
 	
-	public String getMessage(String key) {
+	public String getMessage(I18nEnum i18nEnum) {
 		
-		return messageSource.getMessage(key,null,Locale.ENGLISH);
+		return messageSource.getMessage(i18nEnum.getKey(),null,Locale.ENGLISH);
 		
 	}
 	
-	public String getMessage(String key,String... args) {
+	public String getMessage(I18nEnum i18nEnum,String... args) {
 		
-		return messageSource.getMessage(key,args,Locale.ENGLISH);
+		return messageSource.getMessage(i18nEnum.getKey(),args,Locale.ENGLISH);
 		
 	}
 
