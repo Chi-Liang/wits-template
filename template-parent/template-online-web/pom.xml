@@ -20,15 +20,24 @@
 		<dependency>
 			<groupId>com.tsmc.tempalte</groupId>
 			<artifactId>template-online-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.parent.version}</version>
 		</dependency>
+		<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+            </exclusion>
+        </exclusions>
+	    </dependency>
+	    <dependency>
+	           <groupId>org.springframework.boot</groupId>
+	           <artifactId>spring-boot-starter-undertow</artifactId>
+	    </dependency>
 		<!-- <dependency> <groupId>org.springdoc</groupId> <artifactId>springdoc-openapi-ui</artifactId> 
 			</dependency> -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.2.73</version>
-		</dependency>
 	</dependencies>
 
 	<build>

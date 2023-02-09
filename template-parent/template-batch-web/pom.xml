@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>com.tsmc.tempalte</groupId>
 			<artifactId>tempalte-batch-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
