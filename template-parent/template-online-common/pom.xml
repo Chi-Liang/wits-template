@@ -24,6 +24,11 @@
 			<artifactId>template-common-util</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.tsmc.tempalte</groupId>
+			<artifactId>template-service</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>template-online-common</finalName>

@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
-
 import com.tsmc.template.common.config.ConfigValue;
 import com.tsmc.template.common.constant.MsgConstant;
 import com.tsmc.template.common.dao.PhotoAndTempDao;
@@ -18,7 +16,7 @@ import com.tsmc.template.common.util.EntityVoTranfer;
 import com.tsmc.template.common.util.MessageSourceUtil;
 import com.tsmc.template.common.vo.OnPhotoLayerVo;
 import com.tsmc.template.online.common.service.OnPhotoLayerService;
-
+import com.tsmc.template.service.ApiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +31,7 @@ public class OnPhotoLayerServiceFirstImpl implements OnPhotoLayerService {
 	private final MessageSourceUtil messageSourceUtil;
 	private final ConfigValue configValue;
 	private final PhotoAndTempDao photoAndTempDao;
+	private final ApiService apiService;
 	
 	@Override
 	public List<OnPhotoLayerVo> findAll() {
@@ -40,6 +39,7 @@ public class OnPhotoLayerServiceFirstImpl implements OnPhotoLayerService {
 		log.info(messageSourceUtil.getMessage(MsgConstant.OnlineMessage.demo_message_args, "aa","bb"));
 		log.info(configValue.getBatchSize());
 		photoAndTempDao.getPhotoAndConfigType().stream().forEach( p -> log.info(p.toString()));
+		apiService.opentdb();
 		
 		List<OnPhotoLayerVo> onPhotoLayerVoList = onPhotoLayerRepository.findAll().stream().map( u -> {
 			OnPhotoLayerVo onPhotoLayerVo = new OnPhotoLayerVo();
