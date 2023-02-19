@@ -9,9 +9,9 @@ import com.tsmc.template.common.entity.OnPhotoLayer;
 @Repository
 public interface OnPhotoLayerRepository extends JpaRepository<OnPhotoLayer, String> {
 	
-	String sql = "select PHOTO_LAYER,PHOTO_LAYER_NAME,CONFIG_TYPE from DBO.ON_PHOTO_LAYER where CONFIG_TYPE = :configType";
+//	String sql = "select PHOTO_LAYER,PHOTO_LAYER_NAME,CONFIG_TYPE,CREATE_DT,UPDATE_DT from DBO.ON_PHOTO_LAYER where CONFIG_TYPE = :configType";
 	
-	@Query(nativeQuery = true, value = sql)
-	public List<OnPhotoLayer> getConfigType(String configType);
+//	@Query(nativeQuery = true, value = sql)
+	public List<OnPhotoLayer> getByConfigType(String configType);
 
 }
