@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.tsmc.template.common.config.ConfigValue;
 import com.tsmc.template.common.constant.MsgConstant;
+import com.tsmc.template.common.dao.PhotoAndTempDao;
 import com.tsmc.template.common.entity.OnPhotoLayer;
 import com.tsmc.template.common.repository.OnPhotoLayerRepository;
 import com.tsmc.template.common.util.EntityVoTranfer;
@@ -31,12 +32,14 @@ public class OnPhotoLayerServiceFirstImpl implements OnPhotoLayerService {
 	private final EntityVoTranfer<OnPhotoLayerVo,OnPhotoLayer> voToentity;
 	private final MessageSourceUtil messageSourceUtil;
 	private final ConfigValue configValue;
+	private final PhotoAndTempDao photoAndTempDao;
 	
 	@Override
 	public List<OnPhotoLayerVo> findAll() {
 		
 		log.info(messageSourceUtil.getMessage(MsgConstant.OnlineMessage.demo_message_args, "aa","bb"));
 		log.info(configValue.getBatchSize());
+		photoAndTempDao.getPhotoAndConfigType().stream().forEach( p -> log.info(p.toString()));
 		
 		List<OnPhotoLayerVo> onPhotoLayerVoList = onPhotoLayerRepository.findAll().stream().map( u -> {
 			OnPhotoLayerVo onPhotoLayerVo = new OnPhotoLayerVo();

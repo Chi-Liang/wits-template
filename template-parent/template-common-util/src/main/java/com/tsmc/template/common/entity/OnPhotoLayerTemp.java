@@ -20,5 +20,8 @@ public class OnPhotoLayerTemp {
 	
 	@Column(name = "CONFIG_TYPE")
 	private String configType;
+	
+	@Column(name = "CONFIG_TYPE1")
+	private String configType1;
 
 }
