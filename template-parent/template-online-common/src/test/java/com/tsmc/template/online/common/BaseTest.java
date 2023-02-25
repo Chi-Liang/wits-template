@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.tsmc.template.online.common.service.MailService;
 import com.tsmc.template.online.common.service.OnPhotoLayerService;
 
 
@@ -18,14 +20,17 @@ public class BaseTest {
     protected OnPhotoLayerService onPhotoLayerServiceFirst;
 	
     protected OnPhotoLayerService onPhotoLayerServiceSecond;
+    
+    protected MailService mailService;
 	
 	@Autowired
 	public void setBaseTest(OnPhotoLayerService onPhotoLayerServiceFirst,
-			                 OnPhotoLayerService onPhotoLayerServiceSecond) {
+			                 OnPhotoLayerService onPhotoLayerServiceSecond,
+			                 MailService mailService) {
 		
 		this.onPhotoLayerServiceFirst = onPhotoLayerServiceFirst;
 		this.onPhotoLayerServiceSecond = onPhotoLayerServiceSecond;
-		
+		this.mailService = mailService;
 	}
 	
 }

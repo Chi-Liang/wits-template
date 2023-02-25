@@ -29,6 +29,10 @@
 			<artifactId>template-service</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>template-online-common</finalName>
