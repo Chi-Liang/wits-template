@@ -18,6 +18,13 @@ public class LoginController {
     public String login() {
         return "login";
     }
+    
+    @PostMapping("/loginError")
+    public String loginError(Model model, @RequestAttribute String errorMsg) {
+        model.addAttribute("loginError", true);
+        model.addAttribute("errorMsg", errorMsg);
+        return "login";
+    }
 
     @GetMapping("/auth/dashboard")
     public String dashboard(Model model) {

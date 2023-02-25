@@ -12,9 +12,17 @@ import java.io.IOException;
 public class SysLoginFailureHandler implements AuthenticationFailureHandler {
 
 	@Override
-	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+        handle(request, response, exception);
+    }
 
-	}
+    protected void handle(HttpServletRequest request,
+                          HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+
+        request.setAttribute("errorMsg", "帳號或密碼錯誤");
+        String targetUrl = "/loginError";
+        request.getRequestDispatcher(targetUrl).forward(request, response);
+
+    }
 
 }
