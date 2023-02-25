@@ -20,7 +20,21 @@
 
 <script>
 
-$( document ).ready(function() {
+function toAdd() {
+	$("#addStart").val($("#dataInput").val());
+	$("#addTitle").val($("#eventInput").val());
+	$("#addForm").submit();
+}
+
+function toDel() {
+	$("#delForm").submit();
+}
+
+$(document).ready(function() {
+	
+	var json = $("#aaa")[0].innerText;
+	var object = JSON.parse(json);
+	
 	$("#calendar").fullCalendar({
   		
 		buttonText:{
@@ -30,63 +44,36 @@ $( document ).ready(function() {
 			day: '日'
 		},
 		
-		
-	
-        monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], //月份全称
-        monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], //月份简写
-        dayNames: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"], //周全称
-        dayNamesShort: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"], //周简写
+        monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], 
+        monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], 
+        dayNames: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"], 
+        dayNamesShort: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"], 
 		
         titleFormat: 'YYYY年  MMMM',
         
-  		header: { // 頂部排版
-  			left: "prev,next today", // 左邊放置上一頁、下一頁和今天
-  			center: "title", // 中間放置標題
-  			right: "month,basicWeek,basicDay" // 右邊放置月、周、天
+  		header: { 
+  			left: "prev,next today", 
+  			center: "title", 
+  			right: "month,basicWeek,basicDay" 
   		},
-  		defaultDate: "2023-02-25", // 起始日期
-  		editable: true,  // 啟動拖曳調整日期
-  		events: [ // 事件
-  			{ // 事件
-  				title: "約會",
-  				start: "2023-02-01"
-  			},
-  			{ // 事件(包含開始時間)
-  				title: "中餐",
-  				start: "2023-02-12T12:00:00"
-  			},
-  			{ // 事件(包含跨日開始時間、結束時間)
-  				title: "音樂節",
-  				start: "2023-02-07",
-  				end: "2023-02-07"
-  			},
-  			{ // 事件(包含開始時間、結束時間)
-  				title: "會議",
-  				start: "2023-02-22T10:30:00",
-  				end: "2023-02-22T12:30:00"
-  			}
-  		],
-  		
-  		 dayClick: function(data, event, view) {
-  		    $('#eventFormOkButton').data('key',data.id);
-  		    $('#eventFormDelButton').data('key',data.id);
-  		    $('#dataInput').val(data.format('YYYY-MM-DD'));
-  		    $('#evenInput').val(data.spendEvent);
-  		    $('#evenItemInput').val(data.evenItem).trigger('change');
-  		    $('#contentInput').val(data.content); 
-  		    
+  		defaultDate: "2023-02-25",
+  		editable: true,
+  		events: object,
+  	    dayClick: function(data, event, view) {
+  		   	$('#dataInput').val(data.format('YYYY-MM-DD'));
   		    $('#eventFormModalTitle').text('編輯事件');  
-  			
-  		    $('#eventFormDelButton').show();
   		    $('#eventFormModal').modal('show');
   			 
   		  },
-  		  eventClick: function(date, event, view) {
-  		    console.log('modify event');
-  		    console.log(date);
-  		    console.log(event);
-  		    console.log(view);
-  		    console.log(moment());
+  		  eventClick: function(data, event, view) {
+  			  
+  			var json = $("#aaa")[0].innerText;
+  			var object = JSON.parse(json);  
+  			  
+  			$('#dataInput').val(object[3].start);  
+  			$('#eventInput').val(object[3].title);
+  		    $('#eventFormModalTitle').text('編輯事件');  
+  		    $('#eventFormModal').modal('show');
   		  }
   		
   	  });
@@ -118,31 +105,34 @@ $( document ).ready(function() {
 		            <div class = "modal-body">
 		            	<form id="eventForm">
 		            		<div class="form-group">
-		            			<label for="dataInput" class="control-label">事件日期</label>
-		            			<input type="text" class="form-control" id="dataInput" name="dataInput" readonly="readonly" />
-		            		</div>
-		            		
-		            		<div class="form-group">
-		            			<label for="eventInput" class="control-label">事件名稱</label>
+		            			<label for="eventInput" class="control-label">會議名稱</label>
 		            			<input type="text" class="form-control" id="eventInput" name="eventInput" />
 		            		</div>
-		            	
+		            	    <div class="form-group">
+		            			<label for="dataInput" class="control-label">會議日期</label>
+		            			<input type="text" class="form-control" id="dataInput" name="dataInput" readonly="readonly" />
+		            		</div>
 		            	</form>
 		            </div>
 		            
 		            <div class = "modal-footer">
-		            	<button type="button" class="btn btn-default" data-dismiss="modal" >取消</button>
-		            	<button type="button" class="btn btn-primary" id="eventFormOkButton" >確定</button>
-		            	<button type="button" class="btn btn-danger" id="eventFormDelButton" >刪除</button>
+		            	<button type="button" class="btn btn-primary" id="eventFormOkButton" onclick="toAdd()" >新增</button>
+		            	<button type="button" class="btn btn-danger" id="eventFormDelButton" onclick="toDel()" >刪除</button>
 		            </div>
 		        </div>
 		    </div>
 		</div>
 		
+		<p id="aaa" style="display: none;" th:text="${reserveList}"></p>
 		
+		<form th:action="@{/auth/reserve/add}" id="addForm" method="post">
+		    <input type="hidden" id="addStart" name="start"/>
+			<input type="hidden" id="addTitle" name="title"/>
+		</form>
 		
-		
-		
+		<form th:action="@{/auth/reserve/del}" id="delForm" method="post">
+		   
+		</form>
 		
 	</div>
 </body>
