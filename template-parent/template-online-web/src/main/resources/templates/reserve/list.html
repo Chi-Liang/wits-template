@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{defaultLayout}">
+
+<head>
+<title>預約時間表</title>
+
+<script th:src="@{/js/dataTables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/js/dataTables/dataTables.bootstrap.min.js}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.js"></script>
+<!-- FullCalendar v3.8.1 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.css" rel="stylesheet"  />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.print.css" rel="stylesheet" media="print"></script>
+<link th:href="@{/css/dataTables/dataTables.bootstrap.css}"
+	rel="stylesheet">
+<link th:href="@{/css/dataTables/dataTables.responsive.css}"
+	rel="stylesheet">
+
+<script>
+
+$( document ).ready(function() {
+	$("#calendar").fullCalendar({
+  		
+		buttonText:{
+			today: '今天',
+			month: '月',
+			week: '周',
+			day: '日'
+		},
+		
+		
+	
+        monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], //月份全称
+        monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], //月份简写
+        dayNames: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"], //周全称
+        dayNamesShort: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"], //周简写
+		
+        titleFormat: 'YYYY年  MMMM',
+        
+  		header: { // 頂部排版
+  			left: "prev,next today", // 左邊放置上一頁、下一頁和今天
+  			center: "title", // 中間放置標題
+  			right: "month,basicWeek,basicDay" // 右邊放置月、周、天
+  		},
+  		defaultDate: "2023-02-25", // 起始日期
+  		editable: true,  // 啟動拖曳調整日期
+  		events: [ // 事件
+  			{ // 事件
+  				title: "約會",
+  				start: "2023-02-01"
+  			},
+  			{ // 事件(包含開始時間)
+  				title: "中餐",
+  				start: "2023-02-12T12:00:00"
+  			},
+  			{ // 事件(包含跨日開始時間、結束時間)
+  				title: "音樂節",
+  				start: "2023-02-07",
+  				end: "2023-02-07"
+  			},
+  			{ // 事件(包含開始時間、結束時間)
+  				title: "會議",
+  				start: "2023-02-22T10:30:00",
+  				end: "2023-02-22T12:30:00"
+  			}
+  		],
+  		
+  		 dayClick: function(date, event, view) {
+  		    console.log('add event');
+  		    console.log(date);
+  		    console.log(event);
+  		    console.log(view);
+  		    console.log(moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss'));
+  		  },
+  		  eventClick: function(date, event, view) {
+  		    console.log('modify event');
+  		    console.log(date);
+  		    console.log(event);
+  		    console.log(view);
+  		    console.log(moment());
+  		  }
+  		
+  	  });
+	});
+</script>
+
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-flmid">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">預約時間表</h1>
+				</div>
+			</div>
+		</div>	
+		<div id="calendar"></div>
+	</div>
+</body>
+</html>

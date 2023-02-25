@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>管理後台</title>
+        <title>預約系統</title>
 
         <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
         <link th:href="@{/css/metisMenu.min.css}" rel="stylesheet">
@@ -42,7 +42,7 @@
         <div id="wrapper">
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
-                    <a class="navbar-brand">管理後台</a>
+                    <a class="navbar-brand">預約系統</a>
                 </div>
                 
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -72,17 +72,8 @@
                             <li>
                                 <a th:href="@{/auth/dashboard}" ><i class="fa fa-dashboard fa-fw"></i> 首頁</a>
                             </li>
-                            <li sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a th:href="@{/auth/user/list}" ><i class="fa fa-table fa-fw"></i> 後台人員維護</a>
-                            </li>
                             <li>
-                                <a th:href="@{/auth/copywriter/list}" ><i class="fa fa-edit fa-fw"></i> 線上研討會文案群組維護</a>
-                            </li>
-                            <li>
-                                <a th:href="@{/auth/copysession/list}" ><i class="fa fa-edit fa-fw"></i> 線上研討會文案場次維護</a>
-                            </li>
-                            <li>
-                                <a th:href="@{/auth/seminar/list?groupName=&sessionPlace=&sessionTime=}" ><i class="fa fa-edit fa-fw"></i> 研討會線上報名</a>
+                                <a th:href="@{/auth/reserve/list}" ><i class="fa fa-table fa-fw"></i>開始預約</a>
                             </li>
                         </ul>
                     </div>
