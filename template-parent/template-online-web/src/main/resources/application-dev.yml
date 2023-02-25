@@ -15,6 +15,13 @@ spring:
     properties:
       hibernate.format_sql: true
 
+  security:
+    user:
+      name: admin
+      password: 12345
+  thymeleaf:
+      cache: false    
+
 #springdoc:
 #  api-docs.enabled: false
 #  swagger-ui.enabled: false

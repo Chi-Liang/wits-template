@@ -1,18 +1,15 @@
 package com.tsmc.template.online.web.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-
 import com.tsmc.template.common.vo.OnPhotoLayerVo;
 import com.tsmc.template.common.vo.ReturnOnPhotoLayerVo;
 import com.tsmc.template.online.web.BaseTest;
+
 
 public class OnPhotoLayerControllerTest extends BaseTest {
 	

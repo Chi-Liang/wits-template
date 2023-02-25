@@ -6,9 +6,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @SpringBootApplication
-@ComponentScan({"com.tsmc.template.online.web","com.tsmc.template.online.common","com.tsmc.template.common","com.tsmc.template.service"})
+@ComponentScan({ "com.tsmc.template.online.web", "com.tsmc.template.online.common", "com.tsmc.template.common",
+		"com.tsmc.template.service", "com.tsmc.template.security" })
 @EnableJpaRepositories("com.tsmc.template.common.repository")
 @EntityScan("com.tsmc.template.common.entity")
 public class OnlineWebApplication extends SpringBootServletInitializer {
