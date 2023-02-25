@@ -20,7 +20,20 @@ spring:
       name: admin
       password: 12345
   thymeleaf:
-      cache: false    
+      cache: false  
+  mail:
+    host: smtp.gmail.com
+    username: 
+    password: 
+    properties:
+      mail.smtp.auth: true;
+      mail.smtp.starttls.enable: true
+      mail.smtp.ssl.enable: true
+      mail.socketFactory.port: 
+      mail.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.socketFactory.fallback: false
+    smtp:
+      port:       
 
 #springdoc:
 #  api-docs.enabled: false
